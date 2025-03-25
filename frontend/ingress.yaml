@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: frontend
+    namespace: expense
+    annotations:
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        alb.ingress.kubernetes.io/target-type: ip
+        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:982534364647:certificate/8a31db90-5ca3-40ef-8ccd-805698181e34
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+        alb.ingress.kubernetes.io/group.name: malini
+spec:
+  ingressClassName: alb       
+  rules:
+  - host: "expense-dev.daws82s.cloud"
+    http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+              service:
+                name: frontend
+                port:
+                  number: 80       
+    

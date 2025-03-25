@@ -8,3 +8,6 @@ spec:
   containers:
   - name: debug
     image: joindevops/debug:1.0.0
+    envFrom:
+    - configMapRef:
+      
